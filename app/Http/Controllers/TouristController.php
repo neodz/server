@@ -3,10 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Tourist;
+use App\User;
 use Illuminate\Http\Request;
 
 class TouristController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +21,11 @@ class TouristController extends Controller
      */
     public function index()
     {
-        //
+
+        $tourists=Tourist::with('user')->get();
+       // dd($tourists);
+
+       return view('dashboard.Tourists',compact("tourists"));
     }
 
     /**
@@ -78,8 +89,12 @@ class TouristController extends Controller
      * @param  \App\Tourist  $tourist
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Tourist $tourist)
+    public function destroy( $id)
     {
-        //
+
+        $tourist = Tourist::find($id);
+
+
+        return   $tourist->delete()?redirect('/admin/tourists'):back();
     }
 }

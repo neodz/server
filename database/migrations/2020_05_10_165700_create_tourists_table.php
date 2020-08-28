@@ -20,7 +20,6 @@ class CreateTouristsTable extends Migration
             $table->String('type');
             $table->Float('points_wallet');
             $table->text('photo_url');
-            $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });

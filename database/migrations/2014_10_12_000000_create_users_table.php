@@ -19,8 +19,12 @@ class CreateUsersTable extends Migration
             $table->string('phone')->nullable();
             $table->string('email')->unique();
             $table->string('password');
+            $table->enum('role',[1,2,3])->nullable();// 1=>super_admin / 2=>admin / 3=>tourist
+
             $table->rememberToken();
             $table->timestamps();
+
+
         });
     }
 
